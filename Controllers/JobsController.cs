@@ -10,6 +10,11 @@ public class JobsController: ControllerBase
 {
     private readonly JobTrackerService _jobTrackerService;
 
+    private static readonly string[] Status = new[]
+    {
+        "pending", "tech_test", "phone_interview", "in_person_interview", "rejected", "accepted"
+    };
+
     public JobsController(JobTrackerService jobTrackerService)
     {
         _jobTrackerService = jobTrackerService;

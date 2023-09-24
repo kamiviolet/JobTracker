@@ -24,8 +24,10 @@ namespace JobTracker.Models
 
         public string? Agency { get; set; }
 
+        public string Date { get; set; } = DateTime.UtcNow.ToString();
+
         [BsonRepresentation(MongoDB.Bson.BsonType.DateTime)]
-        public DateTime? DateApplied { get; set; }
+        public DateTime DateApplied => DateTime.Parse(Date);
 
         public string Status { get; set; } = "pending";
     }
