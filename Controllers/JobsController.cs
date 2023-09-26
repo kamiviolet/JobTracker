@@ -49,17 +49,11 @@ public class JobsController: ControllerBase
     [HttpPost]
     public async Task<IActionResult> Post(JobEntry newJob)
     {
-
-        if (newJob.DateApplied is null)
-        {
-            newJob.DateApplied = DateTime.UtcNow;
-        }
-
         await _jobTrackerService.CreateEntry(newJob);
         return CreatedAtAction(nameof(GetById), new {id = newJob.Id }, newJob);
     }
 
-    [HttpPut]
+    [HttpPut("{id:length(24)}")]
     public async Task<IActionResult> Put(string id, JobEntry updatedJob)
     {
         var job = await _jobTrackerService.GetEntryById(id);
@@ -73,7 +67,7 @@ public class JobsController: ControllerBase
 
         return NoContent();
     }
-    [HttpDelete]
+    [HttpDelete("{id:length(24)}")]
     public async Task<IActionResult> Delete(string id)
     {
         var job = await _jobTrackerService.GetEntryById(id);
